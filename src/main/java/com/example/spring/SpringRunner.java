@@ -1,9 +1,9 @@
 package com.example.spring;
 
-import com.example.spring.entity.Company;
+import com.example.spring.dto.CompanyDTO;
+import com.example.spring.dto.UserDTO;
 import com.example.spring.service.UserService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.example.spring.entity.User;
 import com.example.spring.service.CompanyService;
 
 public class SpringRunner {
@@ -13,15 +13,15 @@ public class SpringRunner {
             UserService userService = context.getBean(UserService.class);
             CompanyService companyService = context.getBean(CompanyService.class);
 
-            User user = new User();
-            user.setName("Name2");
+            UserDTO userDTO = new UserDTO();
+            userDTO.setName("Name8");
 
-            Company company = new Company();
-            company.setName("Company2");
+            CompanyDTO companyDTO = new CompanyDTO();
+            companyDTO.setName("Company8");
 
 
-            userService.registerUser(user);
-            companyService.registerCompany(company);
+            userService.registerUser(userDTO);
+            companyService.registerCompany(companyDTO);
 
             System.out.println("User is " + userService.findUserById(1L));
             System.out.println("Company is " + companyService.findCompanyById(1L));

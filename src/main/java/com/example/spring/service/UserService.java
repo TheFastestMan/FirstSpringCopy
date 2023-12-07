@@ -1,23 +1,29 @@
 package com.example.spring.service;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.example.spring.dto.UserDTO;
 import com.example.spring.entity.User;
+import com.example.spring.mapper.UserMapper;
 import com.example.spring.repository.UserRepository;
+import lombok.Setter;
 
-@Service
+
 public class UserService {
-
-    @Autowired
     private UserRepository userRepository;
+    private UserMapper userMapper;
 
-    @Transactional
-    public void registerUser(User user) {
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    public void registerUser(UserDTO userDTO) {
+        User user = userMapper.userDTOToUser(userDTO);
         userRepository.save(user);
     }
-    @Transactional(readOnly = true)
+
     public User findUserById(Long id) {
         return userRepository.findUserById(id);
     }

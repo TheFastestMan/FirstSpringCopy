@@ -2,9 +2,10 @@ package com.example.spring.mapper;
 
 import com.example.spring.dto.CompanyDTO;
 import com.example.spring.entity.Company;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-@Component
+@Setter
 public class CompanyMapper {
     public CompanyDTO toCompanyDTO(Company company) {
         CompanyDTO dto = new CompanyDTO();

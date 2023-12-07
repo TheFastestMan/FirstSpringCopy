@@ -1,11 +1,12 @@
 package com.example.spring.mapper;
 
 
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import com.example.spring.dto.UserDTO;
 import com.example.spring.entity.User;
 
-@Component
+@Setter
 public class UserMapper {
 
     public UserDTO userToUserDTO(User user) {

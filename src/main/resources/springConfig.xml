@@ -11,9 +11,58 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.example.spring" />
+    <bean id="user" class="com.example.spring.entity.User" />
 
-    <tx:annotation-driven />
+    <bean id="userDTO" class="com.example.spring.dto.UserDTO" />
 
+    <bean id="userRepository" class="com.example.spring.repository.UserRepository">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="userMapper" class="com.example.spring.mapper.UserMapper"/>
+
+    <bean id="userService" class="com.example.spring.service.UserService">
+        <property name="userRepository" ref="userRepository" />
+        <property name="userMapper" ref="userMapper" />
+    </bean>
+
+    <bean id="company" class="com.example.spring.entity.Company" />
+
+    <bean id="companyDTO" class="com.example.spring.dto.CompanyDTO" />
+
+    <bean id="companyMapper" class="com.example.spring.mapper.CompanyMapper"/>
+
+    <bean id="companyRepository" class="com.example.spring.repository.CompanyRepository">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="companyService" class="com.example.spring.service.CompanyService">
+        <property name="companyRepository" ref="companyRepository" />
+        <property name="companyMapper" ref="companyMapper" />
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.example.spring.entity" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/springEE" />
+        <property name="username" value="postgres" />
+        <property name="password" value="postgres" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>

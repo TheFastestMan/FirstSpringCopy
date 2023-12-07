@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.rail'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.modelmapper:modelmapper:2.1.1'
+
+    implementation 'org.hibernate:hibernate-core:5.6.9.Final'
+
+    implementation 'org.apache.commons:commons-dbcp2:2.9.0'
+    implementation 'org.postgresql:postgresql:42.7.0'
+
+    implementation 'org.springframework:spring-orm:5.3.20'
+
+    implementation 'org.springframework:spring-context:6.0.11'
+
+    implementation 'org.springframework:spring-core:6.0.11'
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
